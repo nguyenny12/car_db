@@ -8,35 +8,35 @@ const {
   cars,
   car_details,
   files,
-} = require("./record");
-const Customer = require("./server/models/Customer");
-const AdminLogin = require("./server/models/AdminLogin");
-const SizeVolume = require("./server/models/SizeVolume");
-const Exterior = require("./server/models/Exterior");
-const Furniture = require("./server/models/Furniture");
-const EngineTransmission = require("./server/models/EngineTransmission");
-const CarDetail = require("./server/models/CarDetail");
-const Car = require("./server/models/Car");
-const GFS = require("./server/models/GFS");
-const CarModel = require("./server/models/CarModel");
-const mongoose = require("mongoose");
-const path = require("path");
-const grid = require("gridfs-stream");
-const fs = require("fs");
+} = require('./record');
+const Customer = require('./server/models/Customer');
+const AdminLogin = require('./server/models/AdminLogin');
+const SizeVolume = require('./server/models/SizeVolume');
+const Exterior = require('./server/models/Exterior');
+const Furniture = require('./server/models/Furniture');
+const EngineTransmission = require('./server/models/EngineTransmission');
+const CarDetail = require('./server/models/CarDetail');
+const Car = require('./server/models/Car');
+const GFS = require('./server/models/GFS');
+const CarModel = require('./server/models/CarModel');
+const mongoose = require('mongoose');
+const path = require('path');
+const grid = require('gridfs-stream');
+const fs = require('fs');
 
 // make a connection
 mongoose.connect(
-  "mongodb+srv://khoa:khoa123@cluster0.1rqpo.mongodb.net/car?retryWrites=true&w=majority",
+  'mongodb+srv://khoa:khoa123@cluster0.1rqpo.mongodb.net/car?retryWrites=true&w=majority',
   { useNewUrlParser: true, useUnifiedTopology: true }
 );
 
 // get reference to database
 var connection = mongoose.connection;
 
-connection.on("error", console.error.bind(console, "connection error:"));
+connection.on('error', console.error.bind(console, 'connection error:'));
 
-connection.once("open", function () {
-  console.log("Connection Successful!");
+connection.once('open', function () {
+  console.log('Connection Successful!');
 
   // Create record Admin Login
   //const admin_login = new AdminLogin({ _id: 1, username: "admin", password: "admin" });
@@ -59,28 +59,28 @@ connection.once("open", function () {
   // });
 
   // Create engine transmission
-  // engine_transmissions.forEach((element) => {
-  //   var et = new EngineTransmission(element);
-  //   et.save(function (err, et) {
-  //     if (err) return console.error(err);
-  //   });
-  // });
+  engine_transmissions.forEach((element) => {
+    var et = new EngineTransmission(element);
+    et.save(function (err, et) {
+      if (err) return console.error(err);
+    });
+  });
 
   // Create record furniture
-  // furniture.forEach((element) => {
-  //   var f = new Furniture(element);
-  //   f.save(function (err, f) {
-  //     if (err) return console.error(err);
-  //   });
-  // });
+  furniture.forEach((element) => {
+    var f = new Furniture(element);
+    f.save(function (err, f) {
+      if (err) return console.error(err);
+    });
+  });
 
   // Create record exterior
-  // exteriors.forEach((element) => {
-  //   var e = new Exterior(element);
-  //   e.save(function (err, e) {
-  //     if (err) return console.error(err);
-  //   });
-  // });
+  exteriors.forEach((element) => {
+    var e = new Exterior(element);
+    e.save(function (err, e) {
+      if (err) return console.error(err);
+    });
+  });
 
   // Create record car detail
   // car_details.forEach((element) => {
@@ -107,35 +107,33 @@ connection.once("open", function () {
       var stream_write = gridFs.createWriteStream({
         _id: element._id,
         filename: element.file_name,
-        metadata: element.car_id
+        metadata: element.car_id,
       });
       fs.createReadStream(file_src).pipe(stream_write);
-      stream_write.on("close", function (file) {
-        console.log("Insert image successfully");
+      stream_write.on('close', function (file) {
+        console.log('Insert image successfully');
       });
     } else {
-      console.log("Sorry No Grid FS Object");
+      console.log('Sorry No Grid FS Object');
     }
   });
 
   // Create record car
   // cars.forEach((element) => {
-    
   //   var c = new Car(element);
-  //   console.log(c)
   //   c.save(function (err, c) {
   //     if (err) return console.error(err);
   //   });
   // });
 
   // Test dữ liệu
-//   Car.find({})
-//     .lean()
-//     .populate("image")
-//     .exec(function (err, doc) {
-//       if (err) {
-//         console.log(err);
-//       }
-//       console.log(doc);
-//     });
+  //   Car.find({})
+  //     .lean()
+  //     .populate("image")
+  //     .exec(function (err, doc) {
+  //       if (err) {
+  //         console.log(err);
+  //       }
+  //       console.log(doc);
+  //     });
 });

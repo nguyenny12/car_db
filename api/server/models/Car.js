@@ -1,28 +1,28 @@
-const mongoose = require("mongoose");
-require("./CarModel");
-require("./CarDetail");
-require("./GFS");
+const mongoose = require('mongoose');
+require('./CarModel');
+require('./CarDetail');
+require('./GFS');
 const Car = mongoose.model(
-  "Car",
+  'Car',
   new mongoose.Schema({
     _id: String,
     name: String,
     year: Date,
     image: {
       type: String,
-      ref: "GFS",
+      ref: 'GFS',
     },
     prices: String,
     number: Number,
     node: String,
     car_detail: {
       type: String,
-      ref: "CarDetail",
+      ref: 'CarDetail',
     },
-    car_model: {
+    car_models: {
       type: String,
-      ref: "CarModel",
-    }
+      ref: 'CarModel',
+    },
   })
 );
 

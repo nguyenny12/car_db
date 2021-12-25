@@ -1,12 +1,12 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const CarModel = mongoose.model(
-  "CarModel",
+  'CarModel',
   new mongoose.Schema({
     _id: String,
-    name: String
+    name: String,
   }),
-  "car_models"
+  'car_models'
 );
 
 module.exports = CarModel;
