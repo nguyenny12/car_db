@@ -55,44 +55,44 @@ connection.once('open', function () {
   // });
 
   // Create record size volume
-  // size_volumes.forEach((element) => {
-  //   var sv = new SizeVolume(element);
-  //   sv.save(function (err, sv) {
-  //     if (err) return console.error(err);
-  //   });
-  // });
+  size_volumes.forEach((element) => {
+    var sv = new SizeVolume(element);
+    sv.save(function (err, sv) {
+      if (err) return console.error(err);
+    });
+  });
 
   // Create engine transmission
-  // engine_transmissions.forEach((element) => {
-  //   var et = new EngineTransmission(element);
-  //   et.save(function (err, et) {
-  //     if (err) return console.error(err);
-  //   });
-  // });
+  engine_transmissions.forEach((element) => {
+    var et = new EngineTransmission(element);
+    et.save(function (err, et) {
+      if (err) return console.error(err);
+    });
+  });
 
   // Create record furniture
-  // furniture.forEach((element) => {
-  //   var f = new Furniture(element);
-  //   f.save(function (err, f) {
-  //     if (err) return console.error(err);
-  //   });
-  // });
+  furniture.forEach((element) => {
+    var f = new Furniture(element);
+    f.save(function (err, f) {
+      if (err) return console.error(err);
+    });
+  });
 
   // Create record exterior
-  // exteriors.forEach((element) => {
-  //   var e = new Exterior(element);
-  //   e.save(function (err, e) {
-  //     if (err) return console.error(err);
-  //   });
-  // });
+  exteriors.forEach((element) => {
+    var e = new Exterior(element);
+    e.save(function (err, e) {
+      if (err) return console.error(err);
+    });
+  });
 
   // Create record car detail
-  // car_details.forEach((element) => {
-  //   var cd = new CarDetail(element);
-  //   cd.save(function (err, cd) {
-  //     if (err) return console.error(err);
-  //   });
-  // });
+  car_details.forEach((element) => {
+    var cd = new CarDetail(element);
+    cd.save(function (err, cd) {
+      if (err) return console.error(err);
+    });
+  });
 
   // Create record car model
   // car_models.forEach((element) => {
@@ -103,23 +103,23 @@ connection.once('open', function () {
   // });
 
   // Create gridfs
-  // files.forEach((element) => {
-  //   var file_src = path.join(__dirname, element.file_src);
-  //   var gridFs = grid(connection.db, mongoose.mongo);
+  files.forEach((element) => {
+    var file_src = path.join(__dirname, element.file_src);
+    var gridFs = grid(connection.db, mongoose.mongo);
 
-  //   if (gridFs) {
-  //     var stream_write = gridFs.createWriteStream({
-  //       _id: element._id,
-  //       filename: element.file_name,
-  //     });
-  //     fs.createReadStream(file_src).pipe(stream_write);
-  //     stream_write.on('close', function (file) {
-  //       console.log('Insert image successfully');
-  //     });
-  //   } else {
-  //     console.log('Sorry No Grid FS Object');
-  //   }
-  // });
+    if (gridFs) {
+      var stream_write = gridFs.createWriteStream({
+        _id: element._id,
+        filename: element.file_name,
+      });
+      fs.createReadStream(file_src).pipe(stream_write);
+      stream_write.on('close', function (file) {
+        console.log('Insert image successfully');
+      });
+    } else {
+      console.log('Sorry No Grid FS Object');
+    }
+  });
 
   // Create record car
   // cars.forEach((element) => {
